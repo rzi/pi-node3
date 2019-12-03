@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p To  jest moja pierwsza aplikacja w #{title}
+  br
+  label(for='name') ID: 
+  input(type="id")
+  br
+  br
+  input.ghost-button(type='submit', value='zapytaj bazę')
+  br
+  br
+  p dane z bazy:
+  p.myclass
