@@ -4,12 +4,24 @@ block content
   h1= title
   p To  jest moja pierwsza aplikacja w #{title}
   br
+  form(method='POST' action='/users')
   label(for='name') ID: 
   input(type="id")
   br
   br
-  input.ghost-button(type='submit', value='zapytaj bazę')
+  input.ghost-button(type='submit', value='zapytaj bazę ')
   br
   br
   p dane z bazy:
   p.myclass
+  br
+  form(name="add-estimation", method="post")
+    div.input
+      span.label Title
+      input(type="text", name="title")
+    div.input
+      span.label Description
+      textarea(name="description", cols="40", rows="5")
+    div.actions
+      input(type="submit", value="add")
+  h2= title2
