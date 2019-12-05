@@ -1,24 +1,41 @@
 var express = require('express');
 var router = express.Router();
-var html='<p>paragraf</p>';
+
+// Node.js MySQL SELECT FROM query Example
+// include mysql module
+var mysql = require('mysql');
+ 
+// create a connection variable with the required details
+var con = mysql.createConnection({
+  host: "pi.cba.pl", // ip address of server running mysql
+  user: "Bazapi2019", // user name to your mysql database
+  password: "Bazapi2019", // corresponding password
+  database: "elunch" // use the specified database
+});
+ 
+// make to connection to the database.
+con.connect(function(err) {
+  if (err) throw err;
+  // if connection is successful
+  con.query("SELECT * FROM spl_users", function (err, result, fields) {
+    // if any error while executing above query, throw error
+    if (err) throw err;
+    // if there is no error, you have the result
+    console.log(result);
+  });
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+
 router.post('/', function (req, res, next) {
-  console.log(req.body.title);
-  console.log(req.body.description);
+  console.log(req.body.id);
+  console.log(req.body.imie);
+  console.log(req.body.nazwisko);
   //res.send('Post page');
-  res.render('index', { title: 'Express',title2: req.body.description , title3:req.body.title});
+  res.render('index', { title: 'Express',id: req.body.id , imie:req.body.imie , nazwisko:req.body.nazwisko});
 });
 
-// // if a callback is specified, the rendered HTML string has to be sent explicitly
-// res.render('index', function (err, html) {
-//   res.send(html)
-// })
-
-// // pass a local variable to the view
-// res.render('user', { name: 'Tobi' }, function (err, html) {
-//   // ...
-// })
 module.exports = router;
