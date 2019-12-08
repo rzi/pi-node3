@@ -4,18 +4,20 @@ block content
   h1= title
   p To  jest moja pierwsza aplikacja w #{title}
   br
+  p wybiera z bazy wiersz o podanym ID
+  br
   form(name="add-estimation", method="post")
     div.input
       span.label ID:
       input(type="text", name="id")
-    div.input
-      br
-      span.label Imie:
-      input(type="text", name="imie")
-    div.input
-      br
-      span.label Nazwisko:
-      input(type="text", name="nazwisko")
+    //- div.input
+    //-   br
+    //-   span.label Imie:
+    //-   input(type="text", name="imie")
+    //- div.input
+    //-   br
+    //-   span.label Nazwisko:
+    //-   input(type="text", name="nazwisko")
     div.actions
       br
       input(type="submit", value="zapytaj baze")

@@ -13,17 +13,14 @@ var con = mysql.createConnection({
   database: "elunch" // use the specified database
 });
  
-// make to connection to the database.
-con.connect(function(err) {
-  if (err) throw err;
-  // if connection is successful
-  con.query("SELECT * FROM spl_users", function (err, result, fields) {
-    // if any error while executing above query, throw error
-    if (err) throw err;
-    // if there is no error, you have the result
-    console.log(result);
-  });
-});
+con.connect(function(error){
+  if (error) throw error;
+  if(!!error){
+    console.log(error);
+  }else{
+    console.log('Connected!:)');
+  }
+});  
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -31,11 +28,38 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  console.log(req.body.id);
-  console.log(req.body.imie);
-  console.log(req.body.nazwisko);
-  //res.send('Post page');
-  res.render('index', { title: 'Express',id: req.body.id , imie:req.body.imie , nazwisko:req.body.nazwisko});
+
+  var id = req.body.id;
+  var myid, mysesa, myname,mysurname,mypassword;
+  if (id) {
+    // if connection is successful
+    con.query("SELECT * FROM spl_users WHERE id = ?", [id], function (err, result, fields) {
+
+    // if any error while executing above query, throw error
+     if (err) throw err;
+     // if there is no error, you have the result
+
+    myid=result[0].id;
+
+     //res.send('Post page');
+    res.render('index', { title: 'Express',
+    id: myid ,
+    imie:result[0].name ,
+    nazwisko:result[0].surname
+
+    });
+  });
+  }
+  else{
+    res.send('Parametr ID jest wymagany')
+  }
+  
+  
+  
+    
+  
+
+ 
 });
 
 module.exports = router;
